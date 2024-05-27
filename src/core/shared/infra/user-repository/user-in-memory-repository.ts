@@ -1,4 +1,4 @@
-import { NewsHighLightContent, NewsProps, NewsRepository } from "../../repositories/news-repository";
+import { NewsHighLightContent, NewsProps, NewsRepository } from "@seven/core/shared/repositories/news-repository";
 import { IN_MEMORY_DB } from "./in-memory-db";
 
 export class InMemoryNewsRepository implements NewsRepository {
