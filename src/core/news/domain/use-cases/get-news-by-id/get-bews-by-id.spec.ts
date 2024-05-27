@@ -1,4 +1,4 @@
-import { InMemoryNewsRepository } from "@seven/core/shared/infra/user-repository/user-in-memory-repository";
+import { InMemoryNewsRepository } from "@seven/core/shared/infra/news-repository/news-in-memory-repository";
 import { GetNewsByIdUseCase } from ".";
 
 describe('Get New By Id', () => {

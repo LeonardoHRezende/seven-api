@@ -1,20 +1,20 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { NewsEntity } from "@seven/core/shared/entities/news/news";
 import { NewsProps, NewsRepository } from "@seven/core/shared/repositories/news-repository";
 
 @Injectable()
 export class GetNewsByIdUseCase {
-  constructor(private readonly newsRepository: NewsRepository) { }
+  constructor(private readonly newsRepository: NewsRepository) {}
 
-  async execute(id: string): Promise<NewsProps> {
+  async execute(id: string): Promise<NewsEntity> {
     try {
-      const news = await this.newsRepository.getNewsById(id);
-      if (!news) {
+      const newsProps = await this.newsRepository.getNewsById(id);
+      if (!newsProps) {
         throw new NotFoundException('News not found');
       }
-      return news;
-    }
-    catch (error) {
-      throw new InternalServerErrorException(error.message);
+      return new NewsEntity(newsProps);
+    } catch (error) {
+      throw new Error(error.message);
     }
   }
 }
