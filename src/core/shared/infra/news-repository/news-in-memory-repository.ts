@@ -1,5 +1,6 @@
 import { NewsHighLightContent, NewsProps, NewsRepository } from "@seven/core/shared/repositories/news-repository";
 import { IN_MEMORY_DB } from "./in-memory-db";
+import { NotFoundException } from "@nestjs/common";
 
 export class InMemoryNewsRepository implements NewsRepository {
   constructor(private readonly news: NewsProps[] = IN_MEMORY_DB) {}
@@ -14,11 +15,16 @@ export class InMemoryNewsRepository implements NewsRepository {
   }
 
   async getNewsById(id: string): Promise<NewsProps> {
-    return this.news.find(news => news.id === id);
+    const news = this.news.find(news => news.id === id);
+    if (!news) throw new NotFoundException('News not found');
+    return news;
   }
 
   async getNewsHighLight(page: number): Promise<NewsHighLightContent[]> {
-    return this.news.map(news => ({
+    const pageSize = 10;
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    return this.news.slice(start, end).map(news => ({
       title: news.title,
       coverImage: news.coverImage,
       theme: news.theme,

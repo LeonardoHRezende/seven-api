@@ -1,13 +1,23 @@
 import { randomUUID } from "crypto";
 import { Injectable } from "@nestjs/common";
-import { NewsProps } from "@seven/core/shared/repositories/news-repository";
+import { NewsProps, Paragraph } from "@seven/core/shared/repositories/news-repository";
 
 @Injectable()
 export class NewsEntity {
-  constructor(private readonly props: NewsProps) {
+  private props: NewsProps;
+
+  constructor(props: Partial<NewsProps>) {
     this.props = {
-      ...props,
       id: props.id ?? randomUUID(),
+      theme: props.theme ?? '',
+      title: props.title ?? '',
+      coverImage: props.coverImage ?? '',
+      resume: props.resume ?? '',
+      content: props.content ?? [],
+      contentHighlight: props.contentHighlight ?? '',
+      createdAt: props.createdAt ?? new Date(),
+      updatedAt: props.updatedAt ?? new Date(),
+      author: props.author ?? '',
     };
   }
 
@@ -51,7 +61,7 @@ export class NewsEntity {
     return this.props.author;
   }
 
-  toJSON() {
+  toJSON(): NewsProps {
     return {
       id: this.id,
       theme: this.theme,
