@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 import { Injectable } from "@nestjs/common";
-import { NewsProps } from "../../repositories/news-repository";
+import { NewsProps } from "@seven/core/shared/repositories/news-repository";
 
 @Injectable()
 export class NewsEntity {
