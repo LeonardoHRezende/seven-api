@@ -1,8 +1,15 @@
 {
-  "$schema": "https://json.schemastore.org/nest-cli",
-  "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
-  "compilerOptions": {
-    "deleteOutDir": true
-  }
+  "type": "node",
+  "build": {
+    "builder": "@nestjs/cli:build",
+    "outputPath": "dist"
+  },
+  "functions": [
+    {
+      "handler": "index.main",
+      "environment": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
 }
