@@ -6,10 +6,10 @@ import { NewsService } from '@seven/services/news.service';
 export class NewsController {
   constructor(private readonly newsService: NewsService) { }
 
-  @Get('unique/:id')
-  async getNewsById(@Param('id') id: string): Promise<NewsProps> {
+  @Get('unique/:slug')
+  async getNewsBySlug(@Param('slug') slug: string): Promise<NewsProps> {
     try {
-      return await this.newsService.getNewsById(id);
+      return await this.newsService.getNewsBySlug(slug);
     } catch (error) {
       throw new NotFoundException(error.message);
     }

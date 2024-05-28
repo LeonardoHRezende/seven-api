@@ -9,17 +9,19 @@ export class DatabaseNewsRepository implements NewsRepository {
   async getTopNews(): Promise<NewsHighLightContent[]> {
     const sortedNews = this.news.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
     const topNews = sortedNews.slice(0, 3).map(news => ({
+      slug: news.slug,
       title: news.title,
       coverImage: news.coverImage,
       theme: news.theme,
       contentHighlight: news.contentHighlight,
+      themeColor: news.themeColor
     }));
 
     return topNews;
   }
 
-  async getNewsById(id: string): Promise<NewsProps> {
-    const news = this.news.find(news => news.id === id);
+  async getNewsBySlug(slug: string): Promise<NewsProps> {
+    const news = this.news.find(news => news.slug === slug);
     if (!news) throw new NotFoundException('News not found');
     return news;
   }
@@ -29,10 +31,12 @@ export class DatabaseNewsRepository implements NewsRepository {
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
     return this.news.slice(start, end).map(news => ({
+      slug: news.slug,
       title: news.title,
       coverImage: news.coverImage,
       theme: news.theme,
       contentHighlight: news.contentHighlight,
+      themeColor: news.themeColor
     }));
   }
 }

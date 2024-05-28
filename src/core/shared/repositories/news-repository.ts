@@ -1,14 +1,16 @@
 export interface NewsRepository {
   getTopNews(): Promise<NewsHighLightContent[]>;
-  getNewsById(id: string): Promise<NewsProps>;
+  getNewsBySlug(slug: string): Promise<NewsProps>;
   getNewsHighLight(page: number): Promise<NewsHighLightContent[]>;
 }
 
-export interface NewsHighLightContent extends Pick<NewsProps, 'title' | 'coverImage' | 'theme' | 'contentHighlight'> {}
+export interface NewsHighLightContent extends Pick<NewsProps, 'slug' | 'title' | 'coverImage' | 'theme' | 'themeColor' | 'contentHighlight'> {}
 
 export interface NewsProps {
   id: string;
+  slug: string;
   theme: string;
+  themeColor: string;
   title: string;
   coverImage: string;
   resume: string;

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { GetNewsByIdUseCase } from '@seven/core/news/domain/use-cases/get-news-by-id';
+import { GetNewsBySlugUseCase } from '@seven/core/news/domain/use-cases/get-news-by-id';
 import { GetNewsHighLightUseCase } from '@seven/core/news/domain/use-cases/get-news-high-light';
 import { GetTopNewsUseCase } from '@seven/core/news/domain/use-cases/get-top-news';
 import { DatabaseNewsRepository } from '@seven/core/shared/infra/news-repository/news-in-memory-repository';
@@ -9,9 +9,9 @@ import { NewsHighLightContent, NewsProps } from '@seven/core/shared/repositories
 export class NewsService {
   private databaseNewsRepository = new DatabaseNewsRepository();
 
-  async getNewsById(id: string): Promise<NewsProps> {
-    const getNewsByIdUseCase = new GetNewsByIdUseCase(this.databaseNewsRepository);
-    const newsEntity = await getNewsByIdUseCase.execute(id);
+  async getNewsBySlug(id: string): Promise<NewsProps> {
+    const getNewsBySlugUseCase = new GetNewsBySlugUseCase(this.databaseNewsRepository);
+    const newsEntity = await getNewsBySlugUseCase.execute(id);
     return newsEntity;
   }
 

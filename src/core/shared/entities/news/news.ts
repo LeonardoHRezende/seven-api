@@ -9,7 +9,9 @@ export class NewsEntity {
   constructor(props: Partial<NewsProps>) {
     this.props = {
       id: props.id ?? randomUUID(),
+      slug: props.slug ?? '',
       theme: props.theme ?? '',
+      themeColor: props.themeColor ?? '',
       title: props.title ?? '',
       coverImage: props.coverImage ?? '',
       resume: props.resume ?? '',
@@ -25,8 +27,16 @@ export class NewsEntity {
     return this.props.id;
   }
 
+  get slug() {
+    return this.props.slug;
+  }
+
   get theme() {
     return this.props.theme;
+  }
+
+  get themeColor() {
+    return this.props.themeColor;
   }
 
   get title() {
@@ -64,7 +74,9 @@ export class NewsEntity {
   toJSON(): NewsProps {
     return {
       id: this.id,
+      slug: this.slug,
       theme: this.theme,
+      themeColor: this.themeColor,
       title: this.title,
       coverImage: this.coverImage,
       resume: this.resume,
