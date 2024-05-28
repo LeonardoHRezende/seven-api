@@ -8,7 +8,6 @@ export class GetTopNewsUseCase {
 
   async execute() {
     try {
-      console.log(this.newsRepository);
       const newsPropsArray = await this.newsRepository.getTopNews();
 
       if (!newsPropsArray || newsPropsArray.length === 0) {

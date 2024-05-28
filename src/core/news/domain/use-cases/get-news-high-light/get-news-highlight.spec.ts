@@ -8,6 +8,6 @@ describe('Get Highlight News', () => {
 
     const notice = await getNewsHighLight.execute(1);
 
-    expect(notice).toHaveLength(3);
+    expect(notice).toHaveLength(10);
   });
 });

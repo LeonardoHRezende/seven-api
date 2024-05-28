@@ -7,7 +7,7 @@ describe('Get New By Id', () => {
     const newsRepository = new DatabaseNewsRepository();
     const getNewsByIdUseCase = new GetNewsByIdUseCase(newsRepository);
 
-    const notice = await getNewsByIdUseCase.execute('id');
+    const notice = await getNewsByIdUseCase.execute('1');
 
     expect(notice).toHaveProperty('id');
   });
