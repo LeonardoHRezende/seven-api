@@ -1,9 +1,9 @@
-import { InMemoryNewsRepository } from "@seven/core/shared/infra/news-repository/news-in-memory-repository";
+import { DatabaseNewsRepository } from "@seven/core/shared/infra/news-repository/news-in-memory-repository";
 import { GetTopNewsUseCase } from ".";
 
 describe('Get Top News', () => {
   it('should get top news', async () => {
-    const newsRepository = new InMemoryNewsRepository();
+    const newsRepository = new DatabaseNewsRepository();
     const getTopNewsUseCase = new GetTopNewsUseCase(newsRepository);
 
     const notice = await getTopNewsUseCase.execute();

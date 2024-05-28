@@ -1,17 +1,21 @@
 import { NewsHighLightContent, NewsProps, NewsRepository } from "@seven/core/shared/repositories/news-repository";
 import { IN_MEMORY_DB } from "./in-memory-db";
-import { NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 
-export class InMemoryNewsRepository implements NewsRepository {
-  constructor(private readonly news: NewsProps[] = IN_MEMORY_DB) {}
+@Injectable()
+export class DatabaseNewsRepository implements NewsRepository {
+  private news: NewsProps[] = IN_MEMORY_DB;
 
   async getTopNews(): Promise<NewsHighLightContent[]> {
-    return this.news.map(news => ({
+    const sortedNews = this.news.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+    const topNews = sortedNews.slice(0, 3).map(news => ({
       title: news.title,
       coverImage: news.coverImage,
       theme: news.theme,
       contentHighlight: news.contentHighlight,
     }));
+
+    return topNews;
   }
 
   async getNewsById(id: string): Promise<NewsProps> {

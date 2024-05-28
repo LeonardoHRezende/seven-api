@@ -6,7 +6,7 @@ import { NewsService } from '@seven/services/news.service';
 export class NewsController {
   constructor(private readonly newsService: NewsService) { }
 
-  @Get(':id')
+  @Get('unique/:id')
   async getNewsById(@Param('id') id: string): Promise<NewsProps> {
     try {
       return await this.newsService.getNewsById(id);

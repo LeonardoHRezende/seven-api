@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { NewsEntity } from "@seven/core/shared/entities/news/news";
 import { NewsHighLightContent, NewsRepository } from "@seven/core/shared/repositories/news-repository";
 
-@Injectable()
+
 export class GetNewsHighLightUseCase {
   constructor(private readonly newsRepository: NewsRepository) {}
 
